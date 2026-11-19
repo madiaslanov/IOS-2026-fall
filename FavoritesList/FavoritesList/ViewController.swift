@@ -26,4 +26,15 @@ class ViewController: UIViewController, UITableViewDataSource {
         cell.configure(with: favoriteCars[indexPath.row])
         return cell
     }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == "showDetail",
+              let detailVC = segue.destination as? DetailViewController,
+              let cell = sender as? UITableViewCell,
+              let indexPath = tableView.indexPath(for: cell) else {
+            return
+        }
+
+        detailVC.item = favoriteCars[indexPath.row]
+    }
 }
